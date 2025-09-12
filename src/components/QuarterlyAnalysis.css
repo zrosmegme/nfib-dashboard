@@ -1,0 +1,156 @@
+.drivers-analysis {
+  background: white;
+  padding: 32px;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.period-container {
+  margin-bottom: 32px;
+  padding-bottom: 32px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.period-container:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.period-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.period-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #1e293b;
+}
+
+.period-change {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  font-size: 14px;
+  padding: 8px 16px;
+  border-radius: 6px;
+}
+
+.period-change.change-positive {
+  background: #dcfce7;
+  color: #14532d;
+}
+
+.period-change.change-negative {
+  background: #fee2e2;
+  color: #7f1d1d;
+}
+
+.period-change.change-neutral {
+  background: #f3f4f6;
+  color: #374151;
+}
+
+.factors-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.factor-column {
+  background: #f8f9fa;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.positive-factors {
+  border-left: 3px solid #10b981;
+}
+
+.negative-factors {
+  border-left: 3px solid #ef4444;
+}
+
+.factor-header {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.positive-factors .factor-header {
+  color: #14532d;
+}
+
+.negative-factors .factor-header {
+  color: #7f1d1d;
+}
+
+.factor-item {
+  margin-bottom: 16px;
+  padding: 12px;
+  background: white;
+  border-radius: 6px;
+}
+
+.factor-item:last-child {
+  margin-bottom: 0;
+}
+
+.factor-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1e293b;
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.factor-detail {
+  font-size: 13px;
+  color: #64748b;
+  line-height: 1.5;
+}
+
+.impact-badge {
+  font-size: 10px;
+  font-weight: 600;
+  padding: 2px 6px;
+  border-radius: 4px;
+  letter-spacing: 0.3px;
+}
+
+.impact-badge.impact-high {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.impact-badge.impact-moderate {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.impact-badge.impact-low {
+  background: #dbeafe;
+  color: #1e40af;
+}
+
+@media (max-width: 768px) {
+  .factors-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .period-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+}

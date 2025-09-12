@@ -1,0 +1,25 @@
+{
+  "monthlyData": [
+    { "month": "Jan 2024", "optimism": 89.9, "uncertainty": 88 },
+    { "month": "Feb 2024", "optimism": 89.4, "uncertainty": 89 },
+    { "month": "Mar 2024", "optimism": 88.5, "uncertainty": 91 },
+    { "month": "Apr 2024", "optimism": 90.5, "uncertainty": 93 },
+    { "month": "May 2024", "optimism": 90.5, "uncertainty": 94 },
+    { "month": "Jun 2024", "optimism": 91.5, "uncertainty": 92 },
+    { "month": "Jul 2024", "optimism": 93.7, "uncertainty": 95 },
+    { "month": "Aug 2024", "optimism": 91.2, "uncertainty": 97 },
+    { "month": "Sep 2024", "optimism": 91.5, "uncertainty": 99 },
+    { "month": "Oct 2024", "optimism": 91.3, "uncertainty": 105 },
+    { "month": "Nov 2024", "optimism": 101.7, "uncertainty": 115 },
+    { "month": "Dec 2024", "optimism": 108.7, "uncertainty": 110 },
+    { "month": "Jan 2025", "optimism": 101.9, "uncertainty": 108 },
+    { "month": "Feb 2025", "optimism": 101.9, "uncertainty": 102 },
+    { "month": "Mar 2025", "optimism": 99.8, "uncertainty": 102 },
+    { "month": "Apr 2025", "optimism": 99.7, "uncertainty": 97 },
+    { "month": "May 2025", "optimism": 98.5, "uncertainty": 89 },
+    { "month": "Jun 2025", "optimism": 98.3, "uncertainty": 90 },
+    { "month": "Jul 2025", "optimism": 100.3, "uncertainty": 97 },
+    { "month": "Aug 2025", "optimism": 100.8, "uncertainty": 93 }
+  ],
+  "averageBaseline": 98
+}

@@ -1,0 +1,215 @@
+{
+  "quarterlyAnalysis": [
+    {
+      "quarter": "August 2025",
+      "period": "August",
+      "avgIndex": 100.8,
+      "change": 0.5,
+      "changeDirection": "positive",
+      "supportiveFactors": [
+        {
+          "title": "Sales Expectations Improve",
+          "detail": "Net 12% expect higher real sales volumes, up 6 points from July",
+          "impact": "high"
+        },
+        {
+          "title": "Profit Trends Recovery",
+          "detail": "Net -19% positive profit trends, best reading since March 2023"
+        },
+        {
+          "title": "Pricing Pressures Ease",
+          "detail": "Only 21% raising prices, down 3 points and lowest of 2025"
+        },
+        {
+          "title": "Uncertainty Declines",
+          "detail": "Uncertainty Index fell 4 points to 93, though still above average"
+        }
+      ],
+      "limitingFactors": [
+        {
+          "title": "Labor Quality Concerns Persist",
+          "detail": "21% cite quality of labor as top problem, unchanged from July",
+          "impact": "high"
+        },
+        {
+          "title": "Job Openings Hard to Fill",
+          "detail": "32% report unfilled positions, down only 1 point from July"
+        },
+        {
+          "title": "Qualified Worker Shortage",
+          "detail": "43% report few or no qualified workers available"
+        },
+        {
+          "title": "Inflation Still a Concern",
+          "detail": "11% cite inflation as top business problem"
+        }
+      ]
+    },
+    {
+      "quarter": "July 2025",
+      "period": "July",
+      "avgIndex": 100.3,
+      "change": 1.5,
+      "changeDirection": "positive",
+      "supportiveFactors": [
+        {
+          "title": "Labor Market Normalization",
+          "detail": "Hiring ease improved with only 18% reporting hard-to-fill jobs",
+          "impact": "high"
+        },
+        {
+          "title": "Inventory Satisfaction",
+          "detail": "Net 50% satisfied with current inventory levels"
+        },
+        {
+          "title": "Credit Conditions Stable",
+          "detail": "Only 4% cite financing as their top business problem"
+        }
+      ],
+      "limitingFactors": [
+        {
+          "title": "Earnings Outlook Weak",
+          "detail": "Net -25% expect higher earnings in coming months",
+          "impact": "high"
+        },
+        {
+          "title": "Economic Uncertainty Rising",
+          "detail": "Only 18% expect economy to improve (down from 44% in Jan)"
+        },
+        {
+          "title": "Price Pressures Continue",
+          "detail": "Net 23% still raising average selling prices"
+        },
+        {
+          "title": "Sales Expectations Soft",
+          "detail": "Net 4% expect higher real sales volumes ahead"
+        }
+      ]
+    },
+    {
+      "quarter": "Q2 2025",
+      "period": "April - June",
+      "avgIndex": 98.8,
+      "change": -2.4,
+      "changeDirection": "negative",
+      "supportiveFactors": [
+        {
+          "title": "Labor Market Easing",
+          "detail": "Job openings declining to sustainable levels (36% → 33%)"
+        },
+        {
+          "title": "Wage Pressure Relief",
+          "detail": "Firms raising wages dropped from 33% to 27%"
+        },
+        {
+          "title": "Interest Rate Stability",
+          "detail": "Only 4% cite financing as top problem"
+        }
+      ],
+      "limitingFactors": [
+        {
+          "title": "Sales Expectations Deteriorate",
+          "detail": "Real sales expectations fell for 3 consecutive months",
+          "impact": "high"
+        },
+        {
+          "title": "Credit Access Tightening",
+          "detail": "Net 6% report loans harder to obtain (up 4 pts)"
+        },
+        {
+          "title": "Profit Margins Compressed",
+          "detail": "Net -28% positive profit trends by end of quarter"
+        },
+        {
+          "title": "Inflation Persistence",
+          "detail": "11% cite inflation as top problem (unchanged)"
+        }
+      ]
+    },
+    {
+      "quarter": "Q1 2025",
+      "period": "January - March",
+      "avgIndex": 101.2,
+      "change": 0.7,
+      "changeDirection": "positive",
+      "supportiveFactors": [
+        {
+          "title": "Post-Election Momentum",
+          "detail": "Continued surge from November 2024 election results",
+          "impact": "moderate"
+        },
+        {
+          "title": "Policy Optimism",
+          "detail": "Anticipation of business-friendly regulatory changes"
+        },
+        {
+          "title": "Capital Investment Revival",
+          "detail": "28% planning outlays (highest since Jan 2022)"
+        },
+        {
+          "title": "Expansion Plans Increase",
+          "detail": "Good time to expand rose to 14% in Q1"
+        }
+      ],
+      "limitingFactors": [
+        {
+          "title": "Implementation Uncertainty",
+          "detail": "Concerns about speed and shape of policy changes",
+          "impact": "moderate"
+        },
+        {
+          "title": "Tax Concerns Resurface",
+          "detail": "18% cite taxes as top problem (highest since Nov 2021)"
+        },
+        {
+          "title": "Sales Growth Slowing",
+          "detail": "Net -11% reported higher sales by March"
+        },
+        {
+          "title": "Inventory Challenges",
+          "detail": "Net -7% view inventories as \"too low\""
+        }
+      ]
+    },
+    {
+      "quarter": "Q4 2024",
+      "period": "October - December",
+      "avgIndex": 100.5,
+      "change": 9.3,
+      "changeDirection": "positive",
+      "supportiveFactors": [
+        {
+          "title": "Election Surge",
+          "detail": "Historic 8-point jump in November following election results",
+          "impact": "high"
+        },
+        {
+          "title": "Tax Cut Extension Hopes",
+          "detail": "20% Small Business Deduction made permanent, boosting confidence"
+        },
+        {
+          "title": "Expansion Optimism",
+          "detail": "Net 13% view as good time to expand (highest since Jan 2022)"
+        },
+        {
+          "title": "Policy Optimism",
+          "detail": "Expectations for reduced regulatory burden"
+        }
+      ],
+      "limitingFactors": [
+        {
+          "title": "Pre-Election Weakness",
+          "detail": "Index at 91.3 in October before November surge"
+        },
+        {
+          "title": "Quality Labor Shortage",
+          "detail": "40% report few or no qualified applicants"
+        },
+        {
+          "title": "Sustained Inflation",
+          "detail": "24% still raising prices in December"
+        }
+      ]
+    }
+  ]
+}
