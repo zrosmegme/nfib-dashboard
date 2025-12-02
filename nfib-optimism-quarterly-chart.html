@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NFIB Small Business Optimism Index - Analysis Dashboard</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f8f9fa;
+            color: #212529;
+            line-height: 1.6;
+        }
+        
+        .dashboard-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 24px;
+        }
+        
+        .header-section {
+            background: white;
+            border-radius: 8px;
+            padding: 32px;
+            margin-bottom: 24px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+        }
+        
+        .main-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 8px;
+        }
+        
+        .subtitle {
+            font-size: 16px;
+            color: #64748b;
+            font-weight: 400;
+        }
+        
+        .metrics-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+        
+        .metric-card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+            border-left: 4px solid #3b82f6;
+        }
+        
+        .metric-label {
+            font-size: 12px;
+            text-transform: uppercase;
+            color: #64748b;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+        
+        .metric-value {
+            font-size: 32px;
+            font-weight: 700;
+            color: #0f172a;
+        }
+        
+        .metric-context {
+            font-size: 12px;
+            color: #94a3b8;
+            margin-top: 4px;
+        }
+        
+        .chart-section {
+            background: white;
+            padding: 32px;
+            border-radius: 8px;
+            margin-bottom: 24px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+        }
+        
+        .chart-container {
+            position: relative;
+            height: 450px;
+            margin-top: 24px;
+        }
+        
+        .drivers-analysis {
+            background: white;
+            padding: 32px;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+        }
+        
+        .section-header {
+            font-size: 20px;
+            font-weight: 600;
+            color: #0f172a;
+            margin-bottom: 24px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+        
+        .period-container {
+            margin-bottom: 24px;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .period-header {
+            background: #1e293b;
+            color: white;
+            padding: 16px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .period-title {
+            font-size: 16px;
+            font-weight: 600;
+        }
+        
+        .period-change {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            padding: 4px 12px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .change-positive {
+            color: #10b981;
+        }
+        
+        .change-negative {
+            color: #ef4444;
+        }
+        
+        .change-neutral {
+            color: #94a3b8;
+        }
+        
+        .factors-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            background: #ffffff;
+        }
+        
+        .factor-column {
+            padding: 24px;
+        }
+        
+        .factor-column:first-child {
+            border-right: 1px solid #e2e8f0;
+        }
+        
+        .factor-header {
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .positive-factors .factor-header {
+            color: #10b981;
+        }
+        
+        .negative-factors .factor-header {
+            color: #ef4444;
+        }
+        
+        .factor-item {
+            margin-bottom: 16px;
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .factor-item::before {
+            content: "•";
+            position: absolute;
+            left: 4px;
+            color: #94a3b8;
+        }
+        
+        .positive-factors .factor-item::before {
+            color: #10b981;
+        }
+        
+        .negative-factors .factor-item::before {
+            color: #ef4444;
+        }
+        
+        .factor-title {
+            font-weight: 600;
+            color: #1e293b;
+            font-size: 14px;
+            margin-bottom: 4px;
+        }
+        
+        .factor-detail {
+            font-size: 13px;
+            color: #64748b;
+            line-height: 1.5;
+        }
+        
+        .impact-badge {
+            display: inline-block;
+            font-size: 11px;
+            padding: 2px 6px;
+            border-radius: 4px;
+            margin-left: 8px;
+            font-weight: 600;
+        }
+        
+        .impact-high {
+            background: #fef3c7;
+            color: #92400e;
+        }
+        
+        .impact-moderate {
+            background: #e0e7ff;
+            color: #3730a3;
+        }
+        
+        .legend-section {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin-top: 16px;
+            padding: 16px;
+            background: #f8fafc;
+            border-radius: 6px;
+            flex-wrap: wrap;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            color: #475569;
+        }
+        
+        .legend-color {
+            width: 24px;
+            height: 3px;
+            border-radius: 2px;
+        }
+        
+        .footer-note {
+            margin-top: 32px;
+            padding-top: 24px;
+            border-top: 1px solid #e2e8f0;
+            text-align: center;
+            font-size: 12px;
+            color: #94a3b8;
+        }
+        
+        @media (max-width: 768px) {
+            .factors-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .factor-column:first-child {
+                border-right: none;
+                border-bottom: 1px solid #e2e8f0;
+            }
+            
+            .metrics-row {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <div class="header-section">
+            <h1 class="main-title">NFIB Small Business Optimism & Uncertainty Index Analysis</h1>
+            <p class="subtitle">Monthly Performance with Period-by-Period Driver Analysis | Q1 2023 - October 2025</p>
+        </div>
+        
+        <div class="metrics-row">
+            <div class="metric-card">
+                <div class="metric-label">Optimism Index</div>
+                <div class="metric-value">98.2</div>
+                <div class="metric-context">October 2025 (↓0.6 pts)</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">Uncertainty Index</div>
+                <div class="metric-value">88</div>
+                <div class="metric-context">October 2025 (↓12 pts)</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">52-Year Average</div>
+                <div class="metric-value">98.0</div>
+                <div class="metric-context">Benchmark</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">Peak Uncertainty</div>
+                <div class="metric-value">110</div>
+                <div class="metric-context">October 2024</div>
+            </div>
+        </div>
+        
+        <div class="chart-section">
+            <h2 class="section-header">Optimism & Uncertainty Index Trends</h2>
+            <div class="chart-container">
+                <canvas id="optimismChart"></canvas>
+            </div>
+            <div class="legend-section">
+                <div class="legend-item">
+                    <span class="legend-color" style="background: #3b82f6;"></span>
+                    <span>Optimism Index</span>
+                </div>
+                <div class="legend-item">
+                    <span class="legend-color" style="background: #ef4444;"></span>
+                    <span>52-Year Average (98.0)</span>
+                </div>
+                <div class="legend-item">
+                    <span class="legend-color" style="background: #8b5cf6;"></span>
+                    <span>Uncertainty Index</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="drivers-analysis">
+            <h2 class="section-header">2025 Period-by-Period Driver Analysis</h2>
+
+            <div class="period-container">
+                <div class="period-header">
+                    <div class="period-title">October 2025</div>
+                    <div class="period-change change-negative">
+                        <span>Index: 98.2</span>
+                        <span style="font-weight: 700;">↓ 0.6 pts from September</span>
+                    </div>
+                </div>
+                <div class="factors-grid">
+                    <div class="factor-column positive-factors">
+                        <div class="factor-header">
+                            <span>↑</span> POSITIVE FACTORS
+                        </div>
+                        <div class="factor-item">
+                            <div class="factor-title">Uncertainty Plunges<span class="impact-badge impact-high">HIGH IMPACT</span></div>
+                            <div class="factor-detail">Uncertainty Index fell 12 points to 88 - lowest reading of 2025</div>
+                        </div>
+                        <div class="factor-item">
+                            <div class="factor-title">Above Historical Average</div>
+                            <div class="factor-detail">Index remains above 52-year average of 98</div>
+                        </div>
+                        <div class="factor-item">
+                            <div class="factor-title">Pricing Pressure Easing</div>
+                            <div class="factor-detail">Net 21% raising prices (down 3 pts); 30% planning increases (down 1 pt)</div>
+                        </div>
+                        <div class="factor-item">
+                            <div class="factor-title">Job Openings Steady</div>
+                            <div class="factor-detail">32% have unfilled positions; hiring plans at 15%</div>
+                        </div>
+                    </div>
+                    <div class="factor-column negative-factors">
+                        <div class="factor-header">
+                            <span>↓</span> DRIVERS OF DECLINE
+                        </div>
+                        <div class="factor-item">
+                            <div class="factor-title">Profit Trends Deteriorate<span class="impact-badge impact-high">HIGH IMPACT</span></div>
+                            <div class="factor-detail">Net -25% positive profit trends (down 9 pts) - largest contributor to decline</div>
+                        </div>
+                        <div class="factor-item">
+                            <div class="factor-title">Sales Weakness Deepens</div>
+                            <div class="factor-detail">Net -13% reported higher nominal sales (down 6 pts from September)</div>
+                        </div>
+                        <div class="factor-item">
+                            <div class="factor-title">Labor Quality Crisis<span class="impact-badge impact-high">HIGH IMPACT</span></div>
+                            <div class="factor-detail">27% cite as #1 problem (up 9 pts) - highest since November 2021</div>
+                        </div>
+                        <div class="factor-item">
+                            <div class="factor-title">Inventory & Economic Outlook</div>
+                            <div class="factor-detail">Plans to increase inventories and economic improvement expectations each fell 3 pts</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="period-container">
+                <div class="period-header">
+                    <div class="period-title">August - September 2025</div>
+                    <div class="period-change change-negative">
+                        <span>Aug: 100.8 → Sep: 98.8</span>
+                        <span style="font-weight: 700;">↓ 2.0 pts</span>
+                    </div>
+                </div>
+                <div class="factors-grid">
+                    <div class="factor-column positive-factors">
+                        <div class="factor-header">
+                            <span>↑</span> AUGUST HIGHS
+                        </div>
+                        <div class="factor-item">
+                            <div class="factor-title">Second Straight Month of Gains<span class="impact-badge impact-high">HIGH IMPACT</span></div>
+                            <div class="factor-detail">August 100.8 was highest level since January 2025</div>
+                        </div>
+                        <div class="factor-item">
+                            <div class="factor-title">Uncertainty Declined in August</div>
+                            <div class="factor-detail">Uncertainty Index fell 4 points to 93 in August</div>
+                        </div>
+                        <div class="factor-item">
+                            <div class="factor-title">Above 52-Year Average</div>
+                            <div class="factor-detail">August reading nearly 3 points above historical benchmark</div>
+                        </div>
+                    </div>
+                    <div class="factor-column negative-factors">
+                        <div class="factor-header">
+                            <span>↓</span> SEPTEMBER REVERSAL
+                        </div>
+                        <div class="factor-item">
+                            <div class="factor-title">First Decline in Three Months<span class="impact-badge impact-high">HIGH IMPACT</span></div>
+                            <div class="factor-detail">September fell 2.0 points to 98.8 after sustained gains</div>
+                        </div>
+                        <div class="factor-item">
+                            <div class="factor-title">Uncertainty Spike</div>
+                            <div class="factor-detail">Uncertainty Index surged 7 points to 100 - fourth-highest reading ever</div>
+                        </div>
+                        <div class="factor-item">
+                            <div class="factor-title">Expansion Outlook Uncertainty</div>
+                            <div class="factor-detail">Increase in owners uncertain about expansion outlook drove uncertainty rise</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="period-container">
+                <div class="period-header">
+                    <div class="period-title">July 2025</div>
+                    <div class="period-change change-positive">
+                        <span>Index: 100.3</span>
+                        <span style="font-weight: 700;">↑ 1.7 pts from June</span>
+                    </div>
+                </div>
+                <div class="factors-grid">
+                    <div class="factor-column positive-factors">
+                        <div class="factor-header">
+                            <span>↑</span> DRIVERS OF INCREASE
+                        </div>
+                        <div class="factor-item">
+                            <div class="factor-title">One Big Beautiful Bill Act (OBBBA)<span class="impact-badge impact-high">HIGH IMPACT</span></div>
+                            <div class="factor-detail">20% Small Business Deduction made permanent, boosting confidence</div>
+                        </div>
+                        <div class="factor-item">
+                            <div class="factor-title">Economic Expectations Surge<span class="impact-badge impact-high">HIGH IMPACT</span></div>
+                            <div class="factor-detail">Net 36% expect improvement (up 14 points) - largest component gain</div>
+                        </div>
+                        <div class="factor-item">
+                            <div class="factor-title">Expansion Optimism</div>
+                            <div class="factor-detail">16% say good time to expand (up 5 points from June)</div>
+                        </div>
+                        <div class="factor-item">
+                            <div class="factor-title">Business Health Recovery</div>
+                            <div class="factor-detail">65% report excellent/good health (up 8 points)</div>
+                        </div>
+                    </div>
+                    <div class="factor-column negative-factors">
+                        <div class="factor-header">
+                            <span>↓</span> OFFSETTING PRESSURES
+                        </div>
+                        <div class="factor-item">
+                            <div class="factor-title">Uncertainty Spike<span class="impact-badge impact-high">HIGH IMPACT</span></div>
+                            <div class="factor-detail">Uncertainty Index rose 8 points to 97 despite optimism gains</div>
+                        </div>
+                        <div class="factor-item">
+                            <div class="factor-title">Labor Quality Crisis</div>
+                            <div class="factor-detail">21% cite as #1 problem (up 5 points) - now top concern</div>
+                        </div>
+                        <div class="factor-item">
+                            <div class="factor-title">Sales Weakness</div>
+                            <div class="factor-detail">11% report poor sales - highest since February 2021</div>
+                        </div>
+                        <div class="factor-item">
+                            <div class="factor-title">Persistent Pricing Pressure</div>
+                            <div class="factor-detail">28% still planning price increases</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="period-container">
+                <div class="period-header">
+                    <div class="period-title">Q2 2025 (April - June)</div>
+                    <div class="period-change change-negative">
+                        <span>Avg Index: 98.8</span>
+                        <span style="font-weight: 700;">↓ 2.4 pts from Q1</span>
+                    </div>
+                </div>
+                <div class="factors-grid">
+                    <div class="factor-column positive-factors">
+                        <div class="factor-header">
+                            <span>↑</span> SUPPORTIVE FACTORS
+                        </div>
+                        <div class="factor-item">
+                            <div class="factor-title">Labor Market Easing</div>
+                            <div class="factor-detail">Job openings declining to sustainable levels (36% → 33%)</div>
+                        </div>
+                        <div class="factor-item">
+                            <div class="factor-title">Wage Pressure Relief</div>
+                            <div class="factor-detail">Firms raising wages dropped from 33% to 27%</div>
+                        </div>
+                        <div class="factor-item">
+                            <div class="factor-title">Interest Rate Stability</div>
+                            <div class="factor-detail">Only 4% cite financing as top problem</div>
+                        </div>
+                    </div>
+                    <div class="factor-column negative-factors">
+                        <div class="factor-header">
+                            <span>↓</span> DRIVERS OF DECLINE
+                        </div>
+                        <div class="factor-item">
+                            <div class="factor-title">Sales Expectations Deteriorate<span class="impact-badge impact-high">HIGH IMPACT</span></div>
+                            <div class="factor-detail">Real sales expectations fell for 3 consecutive months</div>
+                        </div>
+                        <div class="factor-item">
+                            <div class="factor-title">Credit Access Tightening</div>
+                            <div class="factor-detail">Net 6% report loans harder to obtain (up 4 pts)</div>
+                        </div>
+                        <div class="factor-item">
+                            <div class="factor-title">Profit Margins Compressed</div>
+                            <div class="factor-detail">Net -28% positive profit trends by end of quarter</div>
+                        </div>
+                        <div class="factor-item">
+                            <div class="factor-title">Inflation Persistence</div>
+                            <div class="factor-detail">11% cite inflation as top problem (unchanged)</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="period-container">
+                <div class="period-header">
+                    <div class="period-title">Q1 2025 (January - March)</div>
+                    <div class="period-change change-positive">
+                        <span>Avg Index: 101.2</span>
+                        <span style="font-weight: 700;">↑ 0.7 pts from Q4 2024</span>
+                    </div>
+                </div>
+                <div class="factors-grid">
+                    <div class="factor-column positive-factors">
+                        <div class="factor-header">
+                            <span>↑</span> DRIVERS OF INCREASE
+                        </div>
+                        <div class="factor-item">
+                            <div class="factor-title">Post-Election Momentum<span class="impact-badge impact-moderate">MODERATE</span></div>
+                            <div class="factor-detail">Continued surge from November 2024 election results</div>
+                        </div>
+                        <div class="factor-item">
+                            <div class="factor-title">Policy Optimism</div>
+                            <div class="factor-detail">Anticipation of business-friendly regulatory changes</div>
+                        </div>
+                        <div class="factor-item">
+                            <div class="factor-title">Capital Investment Revival</div>
+                            <div class="factor-detail">28% planning outlays (highest since Jan 2022)</div>
+                        </div>
+                        <div class="factor-item">
+                            <div class="factor-title">Expansion Plans Increase</div>
+                            <div class="factor-detail">Good time to expand rose to 14% in Q1</div>
+                        </div>
+                    </div>
+                    <div class="factor-column negative-factors">
+                        <div class="factor-header">
+                            <span>↓</span> LIMITING FACTORS
+                        </div>
+                        <div class="factor-item">
+                            <div class="factor-title">Implementation Uncertainty<span class="impact-badge impact-moderate">MODERATE</span></div>
+                            <div class="factor-detail">Concerns about speed and shape of policy changes</div>
+                        </div>
+                        <div class="factor-item">
+                            <div class="factor-title">Tax Concerns Resurface</div>
+                            <div class="factor-detail">18% cite taxes as top problem (highest since Nov 2021)</div>
+                        </div>
+                        <div class="factor-item">
+                            <div class="factor-title">Sales Growth Slowing</div>
+                            <div class="factor-detail">Net -11% reported higher sales by March</div>
+                        </div>
+                        <div class="factor-item">
+                            <div class="factor-title">Inventory Challenges</div>
+                            <div class="factor-detail">Net -7% view inventories as "too low"</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-note">
+            Source: National Federation of Independent Business (NFIB) Monthly Surveys | Data through October 2025
+        </div>
+    </div>
+
+    <script>
+        // Chart configuration with Uncertainty Index added
+        const quarterlyData = {
+            labels: ['Q1 2023', 'Q2 2023', 'Q3 2023', 'Q4 2023',
+                     'Q1 2024', 'Q2 2024', 'Q3 2024', 'Q4 2024',
+                     'Q1 2025', 'Q2 2025', 'Jul 2025', 'Aug 2025', 'Sep 2025', 'Oct 2025'],
+            optimism: [90.5, 90.8, 91.0, 91.5,
+                       91.2, 91.5, 91.2, 100.5,
+                       101.2, 98.8, 100.3, 100.8, 98.8, 98.2],
+            uncertainty: [85, 87, 88, 92,
+                         90, 92, 95, 110,
+                         104, 92, 97, 93, 100, 88]
+        };
+
+        const ctx = document.getElementById('optimismChart').getContext('2d');
+        
+        const gradient = ctx.createLinearGradient(0, 0, 0, 350);
+        gradient.addColorStop(0, 'rgba(59, 130, 246, 0.2)');
+        gradient.addColorStop(1, 'rgba(59, 130, 246, 0.02)');
+
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: quarterlyData.labels,
+                datasets: [{
+                    label: 'Optimism Index',
+                    data: quarterlyData.optimism,
+                    borderColor: '#3b82f6',
+                    backgroundColor: gradient,
+                    borderWidth: 3,
+                    fill: true,
+                    tension: 0.3,
+                    pointRadius: 5,
+                    pointBackgroundColor: '#ffffff',
+                    pointBorderColor: '#3b82f6',
+                    pointBorderWidth: 2,
+                    pointHoverRadius: 7,
+                    pointHoverBackgroundColor: '#3b82f6',
+                    pointHoverBorderColor: '#ffffff',
+                    pointHoverBorderWidth: 2,
+                    yAxisID: 'y'
+                }, {
+                    label: 'Uncertainty Index',
+                    data: quarterlyData.uncertainty,
+                    borderColor: '#8b5cf6',
+                    backgroundColor: 'rgba(139, 92, 246, 0.1)',
+                    borderWidth: 2.5,
+                    borderDash: [6, 3],
+                    fill: false,
+                    tension: 0.3,
+                    pointRadius: 4,
+                    pointBackgroundColor: '#ffffff',
+                    pointBorderColor: '#8b5cf6',
+                    pointBorderWidth: 2,
+                    pointHoverRadius: 6,
+                    pointHoverBackgroundColor: '#8b5cf6',
+                    pointHoverBorderColor: '#ffffff',
+                    pointHoverBorderWidth: 2,
+                    yAxisID: 'y1'
+                }, {
+                    label: '52-Year Average',
+                    data: Array(quarterlyData.labels.length).fill(98),
+                    borderColor: '#ef4444',
+                    borderWidth: 2,
+                    borderDash: [8, 4],
+                    fill: false,
+                    pointRadius: 0,
+                    pointHoverRadius: 0,
+                    yAxisID: 'y'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                interaction: {
+                    mode: 'index',
+                    intersect: false,
+                },
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        backgroundColor: 'rgba(15, 23, 42, 0.95)',
+                        padding: 14,
+                        cornerRadius: 6,
+                        titleFont: {
+                            size: 13,
+                            weight: '600'
+                        },
+                        bodyFont: {
+                            size: 12
+                        },
+                        callbacks: {
+                            label: function(context) {
+                                if (context.datasetIndex === 0) {
+                                    return 'Optimism: ' + context.parsed.y.toFixed(1);
+                                } else if (context.datasetIndex === 1) {
+                                    return 'Uncertainty: ' + context.parsed.y.toFixed(0);
+                                } else {
+                                    return '52-Year Avg: ' + context.parsed.y.toFixed(1);
+                                }
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        type: 'linear',
+                        display: true,
+                        position: 'left',
+                        beginAtZero: false,
+                        min: 85,
+                        max: 115,
+                        title: {
+                            display: true,
+                            text: 'Optimism Index',
+                            color: '#3b82f6',
+                            font: {
+                                size: 12,
+                                weight: '600'
+                            }
+                        },
+                        grid: {
+                            color: 'rgba(0, 0, 0, 0.04)',
+                            drawBorder: false
+                        },
+                        ticks: {
+                            color: '#64748b',
+                            font: {
+                                size: 11
+                            },
+                            callback: function(value) {
+                                return value.toFixed(0);
+                            }
+                        }
+                    },
+                    y1: {
+                        type: 'linear',
+                        display: true,
+                        position: 'right',
+                        beginAtZero: false,
+                        min: 85,
+                        max: 115,
+                        title: {
+                            display: true,
+                            text: 'Uncertainty Index',
+                            color: '#8b5cf6',
+                            font: {
+                                size: 12,
+                                weight: '600'
+                            }
+                        },
+                        grid: {
+                            drawOnChartArea: false,
+                            drawBorder: false
+                        },
+                        ticks: {
+                            color: '#8b5cf6',
+                            font: {
+                                size: 11
+                            },
+                            callback: function(value) {
+                                return value.toFixed(0);
+                            }
+                        }
+                    },
+                    x: {
+                        grid: {
+                            display: false,
+                            drawBorder: false
+                        },
+                        ticks: {
+                            color: '#64748b',
+                            font: {
+                                size: 11
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
