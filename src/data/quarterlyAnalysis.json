@@ -1,6 +1,93 @@
 {
   "quarterlyAnalysis": [
     {
+      "quarter": "October 2025",
+      "period": "October",
+      "avgIndex": 98.2,
+      "change": -0.6,
+      "changeDirection": "negative",
+      "supportiveFactors": [
+        {
+          "title": "Uncertainty Plunges",
+          "detail": "Uncertainty Index fell 12 points to 88 - lowest reading of 2025",
+          "impact": "high"
+        },
+        {
+          "title": "Above Historical Average",
+          "detail": "Index remains above 52-year average of 98"
+        },
+        {
+          "title": "Pricing Pressure Easing",
+          "detail": "Net 21% raising prices (down 3 pts); 30% planning increases (down 1 pt)"
+        },
+        {
+          "title": "Job Openings Steady",
+          "detail": "32% have unfilled positions; hiring plans at 15%"
+        }
+      ],
+      "limitingFactors": [
+        {
+          "title": "Profit Trends Deteriorate",
+          "detail": "Net -25% positive profit trends (down 9 pts) - largest contributor to decline",
+          "impact": "high"
+        },
+        {
+          "title": "Sales Weakness Deepens",
+          "detail": "Net -13% reported higher nominal sales (down 6 pts from September)"
+        },
+        {
+          "title": "Labor Quality Crisis",
+          "detail": "27% cite as #1 problem (up 9 pts) - highest since November 2021",
+          "impact": "high"
+        },
+        {
+          "title": "Inventory & Economic Outlook",
+          "detail": "Plans to increase inventories and economic improvement expectations each fell 3 pts"
+        }
+      ]
+    },
+    {
+      "quarter": "September 2025",
+      "period": "September",
+      "avgIndex": 98.8,
+      "change": -2.0,
+      "changeDirection": "negative",
+      "supportiveFactors": [
+        {
+          "title": "Above 52-Year Average",
+          "detail": "Index remained above historical benchmark despite decline"
+        },
+        {
+          "title": "Labor Market Steady",
+          "detail": "Job openings and hiring plans remained relatively stable"
+        },
+        {
+          "title": "Credit Conditions Stable",
+          "detail": "Financing remains accessible for most small businesses"
+        }
+      ],
+      "limitingFactors": [
+        {
+          "title": "First Decline in Three Months",
+          "detail": "September fell 2.0 points after sustained gains in July and August",
+          "impact": "high"
+        },
+        {
+          "title": "Uncertainty Spike",
+          "detail": "Uncertainty Index surged 7 points to 100 - fourth-highest reading ever",
+          "impact": "high"
+        },
+        {
+          "title": "Expansion Outlook Uncertainty",
+          "detail": "Increase in owners uncertain about expansion outlook drove uncertainty rise"
+        },
+        {
+          "title": "Economic Concerns",
+          "detail": "Growing concerns about near-term economic conditions"
+        }
+      ]
+    },
+    {
       "quarter": "August 2025",
       "period": "August",
       "avgIndex": 100.8,

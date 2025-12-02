@@ -19,7 +19,9 @@
     { "month": "May 2025", "optimism": 98.5, "uncertainty": 89 },
     { "month": "Jun 2025", "optimism": 98.3, "uncertainty": 90 },
     { "month": "Jul 2025", "optimism": 100.3, "uncertainty": 97 },
-    { "month": "Aug 2025", "optimism": 100.8, "uncertainty": 93 }
+    { "month": "Aug 2025", "optimism": 100.8, "uncertainty": 93 },
+    { "month": "Sep 2025", "optimism": 98.8, "uncertainty": 100 },
+    { "month": "Oct 2025", "optimism": 98.2, "uncertainty": 88 }
   ],
   "averageBaseline": 98
 }
